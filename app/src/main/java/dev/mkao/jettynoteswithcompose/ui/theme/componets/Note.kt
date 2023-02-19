@@ -1,7 +1,11 @@
 package dev.mkao.jettynoteswithcompose.ui.theme.componets
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Checkbox
@@ -11,21 +15,26 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
-class Note {
 
+    @SuppressLint("NotConstructor")
     @Composable
     fun Note() {
-        Box(
-            modifier = Modifier
-                .size(45.dp)
-                .background(NGreen)
-        )
-        Text(text = "Title ", maxLines = 1)
-        Text(text = "Body", maxLines = 2)
-        Checkbox(
-            checked = false, onCheckedChange = {},
-            modifier = Modifier.padding(start = 8.dp)
-        )
+         Row( modifier = Modifier.fillMaxWidth()){
+
+         Box(modifier = Modifier
+             .size(40.dp)
+             .background(rwGreen)
+                 )
+         Column(modifier = Modifier.weight(1f)){
+             Text(text = "Title", maxLines = 1)
+             Text(text = "Description", maxLines = 2)
+         }
+             Checkbox(
+                 checked = false,
+             onCheckedChange = { },
+             modifier = Modifier.padding(start = 8.dp)
+             )
+         }
     }
 
     @Preview
@@ -33,4 +42,3 @@ class Note {
     private fun NotePreview() {
         Note()
     }
-}
