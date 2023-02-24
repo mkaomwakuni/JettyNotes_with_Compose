@@ -26,6 +26,7 @@ private fun Appdrawer() {
         Text(text = "JettyNotes",
         modifier = Modifier
             .align(alignment = Alignment.CenterVertically)
+        )
     }
 }
 @Preview
