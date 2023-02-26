@@ -13,6 +13,7 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -21,6 +22,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import dev.mkao.jettynoteswithcompose.ui.theme.JettyNotesThemeSetting
 import dev.mkao.jettynoteswithcompose.ui.theme.JettyNotesWithComposeTheme
 
 @Composable
@@ -91,6 +93,27 @@ private  fun ScreenNavigationButton(
    }
 
 }
+@Composable
+private fun LightDarkItem() {
+    Row(Modifier
+        .padding(8.dp)
+    ) {
+       Text(text = "Switch Dark Mode",
+       style = MaterialTheme.typography.bodyMedium,
+       color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8f),
+       modifier = Modifier
+           .weight(2f)
+           .padding(start = 8.dp, top = 8.dp, bottom = 8.dp)
+           .align(alignment = Alignment.CenterVertically)
+       )
+        Switch(checked = JettyNotesThemeSetting.isDarkModeEnabled, onCheckedChange = {
+            JettyNotesThemeSetting.isDarkModeEnabled = it
+        },
+        modifier = Modifier
+            .padding(start = 8.dp, end = 8.dp)
+            .align(alignment = Alignment.CenterVertically))
+    }
+}
 
     @Preview
 @Composable
@@ -106,5 +129,13 @@ fun ScreenNavigationButtonPreview(){
     JettyNotesWithComposeTheme {
         ScreenNavigationButton(icon = Icons.Filled.Home, label = "Jetty Notes" , isSelected = true,
         onClick = { })
+    }
+}
+@Preview
+@Composable
+fun LightDarkItemPreview(){
+    JettyNotesWithComposeTheme {
+        LightDarkItem()
+
     }
 }
