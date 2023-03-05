@@ -22,17 +22,18 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.BlendMode.Companion.Screen
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.mkao.jettynoteswithcompose.router.JettyRouter
+import dev.mkao.jettynoteswithcompose.router.Screen
+import dev.mkao.jettynoteswithcompose.router.Screen.*
 import dev.mkao.jettynoteswithcompose.ui.theme.JettyNotesThemeSetting
 import dev.mkao.jettynoteswithcompose.ui.theme.JettyNotesWithComposeTheme
 
 @Composable
-private fun AppDrawer() {
+private fun AppDrawerHead() {
     Row(modifier = Modifier.fillMaxWidth()){
         Image(imageVector = Icons.Filled.Menu , contentDescription ="Drawer Header Icon Menu",
         colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface),
@@ -124,19 +125,19 @@ private fun LightDarkItem() {
 @Composable
 fun AppDrawer(
     currentScreen: Screen,
-    closeDrawerAct: () -> unit
+    closeDrawerAct: () -> Unit
 ){
     Column(modifier = Modifier.fillMaxSize()) {
-        AppDrawerHeader()
+        AppDrawerHead()
         Divider(color = MaterialTheme.colorScheme.onSurface.copy(alpha = .3f))
-        ScreenNavigationButton(icon = Icons.Filled.Home, label = "Notes", isSelected = currentScreen ==Screen.Notes,
+        ScreenNavigationButton(icon = Icons.Filled.Home, label = "Notes", isSelected = currentScreen == Notes,
         onClick = {
-            JettyRouter.navigateTo(Screen.Notes)
+            JettyRouter.navigateTo(Notes)
             closeDrawerAct()
         })
-    ScreenNavigationButton(icon = Icons.Filled.Delete, label = "Trash Bin", isSelected =currentScreen==Trash,
+    ScreenNavigationButton(icon = Icons.Filled.Delete, label = "Trash Bin", isSelected = currentScreen == TrashBin,
     onClick = {
-        JettyRouter.navigateTo(Screen.TrashBin)
+        JettyRouter.navigateTo(TrashBin)
         closeDrawerAct()
        }
     )
@@ -146,9 +147,9 @@ fun AppDrawer(
 
     @Preview
 @Composable
-fun AppDrawerPreview(){
+fun AppDrawerHeadPreview(){
     JettyNotesWithComposeTheme {
-        AppDrawer()
+        AppDrawerHead()
         
     }
 }
@@ -166,5 +167,12 @@ fun LightDarkItemPreview(){
     JettyNotesWithComposeTheme {
         LightDarkItem()
 
+    }
+}
+@Preview
+@Composable
+fun AppDrawerPreview() {
+    JettyNotesWithComposeTheme {
+        AppDrawer(Notes, {})
     }
 }
